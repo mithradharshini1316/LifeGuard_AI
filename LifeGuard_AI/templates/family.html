@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Family Dashboard - LifeGuard AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="logo">
+🏥 LifeGuard AI
+</div>
+
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/emergency">Emergency</a></li>
+
+</ul>
+
+</nav>
+
+
+
+
+
+
+
+<section class="hero">
+
+
+<h1>👨‍👩‍👧 Family Dashboard</h1>
+
+<p>
+Emergency monitoring system
+</p>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>🚨 Emergency Status</h2>
+
+
+<p id="alert">
+
+Checking emergency status...
+
+</p>
+
+
+<p id="time"></p>
+
+
+
+<button class="btn" onclick="checkAlert()">
+
+🔄 Refresh Alert
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>📍 Live Location</h2>
+
+
+<p id="map">
+
+Location not available
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>📷 Camera Status</h2>
+
+
+<p id="cameraStatus">
+
+Camera status unavailable
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>📞 Contact User</h2>
+
+
+<a href="tel:108" class="btn">
+
+📞 Emergency Call
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+function checkAlert(){
+
+
+fetch("/get_sos")
+
+
+.then(response => response.json())
+
+
+.then(data => {
+
+
+
+document.getElementById("alert").innerHTML =
+
+
+"🚨 Status: " +
+
+(data.status || "Normal")
+
++
+
+"<br><br>📝 Message: "
+
++
+
+(data.message || "No emergency");
+
+
+
+
+
+
+
+document.getElementById("time").innerHTML =
+
+
+"🕒 Time: "
+
++
+
+(data.time || "No time");
+
+
+
+
+
+
+
+if(data.location){
+
+
+
+document.getElementById("map").innerHTML =
+
+
+"📍 Location Found<br><br>" +
+
+
+"<a class='btn' target='_blank' href='https://www.google.com/maps?q="
+
++
+
+data.location
+
++
+
+"'>Open Map</a>";
+
+
+
+}
+
+else{
+
+
+document.getElementById("map").innerHTML =
+"Location not available";
+
+
+}
+
+
+
+
+
+})
+
+
+
+.catch(error=>{
+
+
+console.log(error);
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+setInterval(checkAlert,5000);
+
+
+checkAlert();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

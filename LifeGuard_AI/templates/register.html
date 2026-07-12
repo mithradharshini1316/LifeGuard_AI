@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register - LifeGuard AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="logo">
+🏥 LifeGuard AI
+</div>
+
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/login">Login</a></li>
+
+</ul>
+
+</nav>
+
+
+
+
+
+<section class="hero">
+
+
+<h1>📝 Create Account</h1>
+
+<p>Join LifeGuard AI</p>
+
+
+
+
+
+<form method="POST" action="/register">
+
+
+
+<input 
+type="text"
+name="name"
+placeholder="Full Name"
+required>
+
+
+
+<br><br>
+
+
+
+
+<input 
+type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+
+
+<br><br>
+
+
+
+
+<input 
+type="password"
+name="password"
+placeholder="Create Password"
+required>
+
+
+
+<br><br>
+
+
+
+
+<button class="btn" type="submit">
+
+Register
+
+</button>
+
+
+
+</form>
+
+
+
+
+
+<br>
+
+
+<p>
+Already have an account?
+</p>
+
+
+<a href="/login" class="btn">
+Login
+</a>
+
+
+
+</section>
+
+
+
+</body>
+
+</html>

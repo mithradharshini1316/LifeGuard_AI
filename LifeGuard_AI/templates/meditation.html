@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meditation Guide - LifeGuard AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="logo">
+🏥 LifeGuard AI
+</div>
+
+
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/chatbot">Chatbot</a></li>
+<li><a href="/medicine">Medicine</a></li>
+<li><a href="/water">Water</a></li>
+<li><a href="/emergency">Emergency</a></li>
+</ul>
+
+</nav>
+
+
+
+
+<section class="hero">
+
+
+<h1>🧘 Meditation Guide</h1>
+
+<p>
+Relax your mind and improve your mental wellness.
+</p>
+
+
+
+
+
+<div class="card">
+
+<h2>🌬️ Breathing Exercise</h2>
+
+<p>
+Slow breathing helps you relax and stay calm.
+</p>
+
+
+<button class="btn" onclick="startTimer()">
+Start 1 Minute
+</button>
+
+
+<h2 id="timer">
+60
+</h2>
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+
+<div class="card">
+
+<h2>🌿 Relaxation Meditation</h2>
+
+
+<p id="relaxText">
+Ready for relaxation.
+</p>
+
+
+<button class="btn" onclick="meditationSteps('relax')">
+Start Relaxation
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>🌙 Sleep Meditation</h2>
+
+
+<p id="sleepText">
+Ready for sleep meditation.
+</p>
+
+
+<button class="btn" onclick="meditationSteps('sleep')">
+Start Sleep Guide
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>🧠 Stress Relief</h2>
+
+
+<p id="stressText">
+Ready for stress relief.
+</p>
+
+
+<button class="btn" onclick="meditationSteps('stress')">
+Start Stress Relief
+</button>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<script>
+
+
+let time = 60;
+let interval = null;
+
+
+
+function startTimer(){
+
+
+clearInterval(interval);
+
+
+time = 60;
+
+
+interval = setInterval(function(){
+
+
+document.getElementById("timer").innerHTML = time;
+
+
+
+if(time <= 0){
+
+
+clearInterval(interval);
+
+
+document.getElementById("timer").innerHTML =
+"Completed 🎉";
+
+
+}
+
+
+time--;
+
+
+},1000);
+
+
+}
+
+
+
+
+
+
+
+function meditationSteps(type){
+
+
+let box;
+
+let steps=[];
+
+let index=0;
+
+
+
+if(type=="relax"){
+
+
+box=document.getElementById("relaxText");
+
+
+steps=[
+
+"🌿 Sit comfortably",
+
+"🌿 Close your eyes",
+
+"🌿 Relax your body",
+
+"🌿 Focus on your breathing"
+
+];
+
+
+}
+
+
+
+
+else if(type=="sleep"){
+
+
+box=document.getElementById("sleepText");
+
+
+steps=[
+
+"🌙 Keep surroundings calm",
+
+"🌙 Take slow breaths",
+
+"🌙 Relax your thoughts"
+
+];
+
+
+}
+
+
+
+
+
+else if(type=="stress"){
+
+
+box=document.getElementById("stressText");
+
+
+steps=[
+
+"🧠 Practice mindfulness",
+
+"🧠 Take short breaks",
+
+"🧠 Focus on positive thoughts"
+
+];
+
+
+}
+
+
+
+
+let timer=setInterval(function(){
+
+
+
+if(index < steps.length){
+
+
+box.innerHTML =
+steps[index] + "<br><br>⏳ Continue...";
+
+
+index++;
+
+
+}
+
+else{
+
+
+box.innerHTML =
+"🎉 Meditation Completed";
+
+
+clearInterval(timer);
+
+
+}
+
+
+
+},3000);
+
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

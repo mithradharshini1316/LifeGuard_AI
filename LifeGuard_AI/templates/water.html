@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Water Intake Tracker - LifeGuard AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        🏥 LifeGuard AI
+    </div>
+
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/chatbot">Chatbot</a></li>
+        <li><a href="/medicine">Medicine</a></li>
+        <li><a href="/water">Water</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+    </ul>
+
+</nav>
+
+
+
+
+<section class="hero">
+
+
+<h1>💧 Water Intake Tracker</h1>
+
+
+<p>
+Track your daily water consumption
+</p>
+
+
+
+
+<div class="card">
+
+
+<h2>
+Today's Water Intake
+</h2>
+
+
+<h1 id="count">
+0 / 8 Glasses
+</h1>
+
+
+
+<div style="background:#ddd;border-radius:20px;width:80%;margin:auto;">
+
+<div id="progress"
+style="height:20px;width:0%;border-radius:20px;">
+</div>
+
+</div>
+
+
+<br>
+
+
+<button class="btn" onclick="addWater()">
+➕ Add Glass
+</button>
+
+
+<button class="btn" onclick="resetWater()">
+Reset
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<script>
+
+
+let waterCount = localStorage.getItem("waterCount") || 0;
+
+
+updateWater();
+
+
+
+function addWater(){
+
+
+if(waterCount < 8){
+
+waterCount++;
+
+localStorage.setItem("waterCount", waterCount);
+
+}
+
+
+updateWater();
+
+
+}
+
+
+
+
+
+function updateWater(){
+
+
+document.getElementById("count").innerHTML =
+waterCount + " / 8 Glasses";
+
+
+
+let percentage = (waterCount / 8) * 100;
+
+
+document.getElementById("progress").style.width =
+percentage + "%";
+
+
+}
+
+
+
+
+
+function resetWater(){
+
+waterCount = 0;
+
+localStorage.setItem("waterCount", waterCount);
+
+updateWater();
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

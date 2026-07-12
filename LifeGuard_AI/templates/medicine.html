@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medicine Reminder - LifeGuard AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+    <div class="logo">🏥 LifeGuard AI</div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/chatbot">Chatbot</a></li>
+        <li><a href="/medicine">Medicine</a></li>
+        <li><a href="/water">Water</a></li>
+        <li><a href="/emergency">Emergency</a></li>
+    </ul>
+</nav>
+
+
+
+<section class="hero">
+
+<h1>💊 Medicine Reminder</h1>
+
+<p>Manage your daily medicine schedule</p>
+
+
+
+<div class="card">
+
+<h2>Add Medicine</h2>
+
+
+<input id="medicineName"
+placeholder="Enter medicine name"
+style="padding:12px;width:250px;">
+
+
+<br><br>
+
+
+<input id="medicineTime"
+type="time"
+style="padding:12px;">
+
+
+<br><br>
+
+
+<button class="btn" onclick="addMedicine()">
+Add Reminder
+</button>
+
+
+</div>
+
+
+
+<br><br>
+
+
+
+<div class="card">
+
+<h2>📋 Your Medicine List</h2>
+
+
+<ul id="medicineList">
+
+</ul>
+
+
+</div>
+
+
+</section>
+
+
+
+<script>
+
+
+// Load saved medicines
+
+window.onload=function(){
+
+let medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+displayMedicines(medicines);
+
+}
+
+
+
+
+function addMedicine(){
+
+
+let name=document.getElementById("medicineName").value;
+
+let time=document.getElementById("medicineTime").value;
+
+
+if(name==="" || time===""){
+
+alert("Please enter medicine name and time");
+
+return;
+
+}
+
+
+
+let medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+
+medicines.push({
+
+name:name,
+time:time
+
+});
+
+
+localStorage.setItem("medicines",JSON.stringify(medicines));
+
+
+
+displayMedicines(medicines);
+
+
+
+document.getElementById("medicineName").value="";
+
+document.getElementById("medicineTime").value="";
+
+
+}
+
+
+
+
+function displayMedicines(medicines){
+
+
+let list=document.getElementById("medicineList");
+
+
+list.innerHTML="";
+
+
+medicines.forEach(function(medicine,index){
+
+
+let item=document.createElement("li");
+
+
+item.innerHTML=
+`
+💊 ${medicine.name} 
+- ⏰ ${medicine.time}
+
+<button onclick="deleteMedicine(${index})">
+Delete
+</button>
+
+`;
+
+
+list.appendChild(item);
+
+
+});
+
+
+}
+
+
+
+
+function deleteMedicine(index){
+
+
+let medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+
+medicines.splice(index,1);
+
+
+localStorage.setItem("medicines",JSON.stringify(medicines));
+
+
+displayMedicines(medicines);
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
